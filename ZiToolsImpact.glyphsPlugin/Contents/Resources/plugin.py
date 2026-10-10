@@ -39,7 +39,7 @@ def find_buttons_with_action(root, needle="showInUnicodeChecker"):
         for v in root.subviews():
             try:
                 act = None
-                if hasattr(v, "action"):
+                if v.respondsToSelector_("action"):
                     act = v.action()
                 act_str = ""
                 if act is not None:
@@ -79,7 +79,7 @@ class ZiToolsImpact(GeneralPlugin):
 
             for btn in buttons:
                 orig_target = btn.target()
-                if hasattr(orig_target, "_orig"):
+                if isinstance(orig_target, UnicodeHandler):
                     # Already hooked
                     continue
                 orig_action = btn.action()
